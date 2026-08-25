@@ -82,6 +82,15 @@ function SidebarApp() {
       classNames
     })
 
+    // Save the whole snap as one entry: a unique id plus all captured values.
+    const id = crypto.randomUUID()
+    await chrome.storage.local.set({
+      [`txn-snap-entry:${id}`]: {
+        id,
+        entry: values
+      }
+    })
+
     renderResults(values as Record<string, string | null>)
   }
 }
