@@ -1,5 +1,5 @@
 import createContentApp from './ContentApp'
-import './styles.css'
+// import './styles.css'
 
 console.log('[From the page context] Hello from content_scripts!')
 
@@ -35,6 +35,21 @@ export default function initial() {
     rootDiv.remove()
   }
 }
+
+function getValueByClassName(className: string): string | null {
+  const selector = className.startsWith('.') ? className : `.${className}`
+  const el = document.querySelector(selector)
+  if (!el) return null
+  const formEl = el as HTMLInputElement
+  return typeof formEl.value === 'string' ? formEl.value : el.textContent?.trim() ?? null
+}
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message?.type !== 'getValuesByClassName') return
+  sendResponse(Object.fromEntries(
+    message.classNames.map((c: string) => [c, getValueByClassName(c)])
+  ))
+})
 
 async function fetchCSS() {
   const cssUrl = new URL('./styles.css', import.meta.url)
