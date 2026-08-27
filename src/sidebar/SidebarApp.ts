@@ -44,10 +44,20 @@ function SidebarApp() {
 
   root.innerHTML = `
     <div class="sidebar_app">
-      <div>
-        <h1 class="sidebar_title">Txn Snap</h1>
-        <div class="Registered Classes">
-          <h2>Registered Classes</h2>
+      <div class="sidebar_header">
+        <h1 class="sidebar_title">SnapEl</h1>
+        <p class="sidebar_subtitle">Snap Elements you need.</p>
+      </div>
+      <div class="sidebar_content">
+        <div class="nav_pill">
+          <div>
+            <button>Home</button>
+            <button>List</button>
+            <button>Export</button>  
+          </div>
+        </div>
+        <div class="snap_these_section">
+          <h2>Snap these:</h2>
           <ul class="class_list"></ul>
         </div>
         <div>
