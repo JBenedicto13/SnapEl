@@ -58,17 +58,22 @@ function SidebarApp() {
         </div>
         <div class="snap_these_section">
           <h2>Snap these:</h2>
-          <ul class="class_list"></ul>
+          <ul class="element_list"></ul>
         </div>
         <div>
-          <input class="sidebar_input" type="text" placeholder="Enter a class to snap" />
-          <button class="add_class_button">Add Class</button>
-          <button class="sidebar_button">Snap</button>
+          <input class="sidebar_input" type="text" placeholder="Enter class" />
+          <button class="add_class_button" type="button">
+            <span>Add</span>
+            <svg class="add_icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+              <path d="M12 5v14M5 12h14" />
+            </svg>
+          </button>
         </div>
         <div class="Captured Values">
-          <h2>Captured Values</h2>
+          <h2>Snapped Recently</h2>
           <ul class="results_list"></ul>
         </div>
+        <button class="sidebar_button" type="button">Snap</button>
         <div class="export_section">
           <h2>Export Data</h2>
           <div class="export_fields">
@@ -91,17 +96,17 @@ function SidebarApp() {
   const classInput = root.querySelector<HTMLInputElement>('.sidebar_input')
   const addButton = root.querySelector<HTMLButtonElement>('.add_class_button')
   const snapButton = root.querySelector<HTMLButtonElement>('.sidebar_button')
-  const classList = root.querySelector<HTMLUListElement>('.class_list')
+  const elementList = root.querySelector<HTMLUListElement>('.element_list')
   const resultsList = root.querySelector<HTMLUListElement>('.results_list')
   const exportStart = root.querySelector<HTMLInputElement>('.export_start')
   const exportEnd = root.querySelector<HTMLInputElement>('.export_end')
   const exportButton = root.querySelector<HTMLButtonElement>('.export_button')
   const exportStatus = root.querySelector<HTMLParagraphElement>('.export_status')
-  if (!classInput || !addButton || !snapButton || !classList || !resultsList) return
+  if (!classInput || !addButton || !snapButton || !elementList || !resultsList) return
   if (!exportStart || !exportEnd || !exportButton || !exportStatus) return
 
   const renderClasses = () => {
-    classList.innerHTML = ''
+    elementList.innerHTML = ''
     classNames.forEach((name, index) => {
       const li = document.createElement('li')
 
@@ -111,14 +116,22 @@ function SidebarApp() {
 
       const removeButton = document.createElement('button')
       removeButton.type = 'button'
-      removeButton.textContent = 'Remove'
+      removeButton.className = 'remove_button'
+      removeButton.title = 'Remove'
+
+      removeButton.innerHTML = `
+        <svg class="remove_icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      `
+
       removeButton.addEventListener('click', () => {
         classNames.splice(index, 1)
         renderClasses()
       })
 
       li.appendChild(removeButton)
-      classList.appendChild(li)
+      elementList.appendChild(li)
     })
   }
 
