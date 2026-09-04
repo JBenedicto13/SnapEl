@@ -212,6 +212,30 @@ body {
   justify-content: center;
 }
 
+.results_list {
+  border: 1px solid var(--pallete-black);
+  border-radius: 10px;
+  min-height: 48px;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.results_list li {
+  text-align: left;
+  padding: 4px 8px;
+}
+
+.results_list li {
+  list-style-type: none;
+  border-left: 4px solid var(--pallete-yellow);
+  padding-left: 4px;
+  margin-right: 16px;
+  font-size: 16px;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
 .sidebar_description {
   font-size: small;
   margin: 0.5rem 0 0;
